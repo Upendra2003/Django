@@ -1,4 +1,47 @@
 {% extends 'todoapp/base.html' %}
 {% block content %}
-<h1> home </h1>
+<div class="d-flex m-5 ">
+    <div class="col-lg-5 shadow mx-auto ">
+        <div class="row">
+            <div class="p-3">
+                <h2 class="alert alert-info">Add New Todo</h2>
+                <form class="d-flex flex-column" action="/add-todo/" method="POST">
+                    {% csrf_token %}
+                    {{form}}
+                    <hr>
+                    <input class="btn btn-info" type="submit" value="Add Todo">
+                </form>
+            </div>
+        </div>
+        
+    </div>
+    {% if todos|length == 0 %}
+        <div class="column">
+            <h1 class="alert alert-warning">No todos</h1>
+        </div>
+    {% else %}
+        <div class="column border ps-2">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for todo in todos %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{todo.title}}</td>
+                            <td>{{todo.description}}</td>
+                            <td><a href="delete-todo/{{todo.id}}" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</div>
 {% endblock  %}

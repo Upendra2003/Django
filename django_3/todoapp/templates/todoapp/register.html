@@ -1,0 +1,14 @@
+{% extends 'todoapp/base.html' %}
+{% block content %}
+<div class="col-lg-5 shadow mx-auto mt-5">
+    <div class="p-3">
+        <h2 class="alert alert-primary">Create Account</h2>
+        <form action="/register/" method="POST">
+            {% csrf_token %}
+            {{form}}
+            <hr>
+            <input class="btn btn-primary" type="submit" value="Create Account">
+        </form>
+    </div>
+</div>
+{% endblock %}
