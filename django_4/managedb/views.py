@@ -34,3 +34,12 @@ def view_product(request,id):
         'get_product':get_product
     }
     return render(request,'managedb/view_product.html',context)
+
+def collectionview(request,id):
+    get_category=Category.objects.get(pk=id)
+    print(get_category)
+    get_products_by_collection=Product.objects.filter(product_category=get_category)
+    context={
+        'products':get_products_by_collection
+    }
+    return render(request,'managedb/collectionview.html',context)
