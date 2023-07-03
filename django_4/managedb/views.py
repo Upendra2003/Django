@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import ProductForm
-from .models import Product
+from .models import Product,Category
 
 # Create your views here.
 def home(request):
@@ -20,9 +20,11 @@ def home(request):
     return render(request,'managedb/index.html',context)
 
 def all_product(request):
+    all_categories=Category.objects.all()
     all_products=Product.objects.all()
     context={
-        'all_products':all_products
+        'all_products':all_products,
+        'all_categories':all_categories
     }
     return render(request,'managedb/view.html',context)
 

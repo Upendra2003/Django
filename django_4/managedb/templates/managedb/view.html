@@ -6,9 +6,13 @@
     <title>Product</title>
 </head>
 <body>
-    {% for product in all_products %}
-        <a href="{% url 'view_product' product.id %}">{{ product.produce_name }}</a>
-        {{ product.product_category }}
+    {% for cat in all_categories %}
+        {% for prod in all_products %}
+            {% if prod.product_category == cat.category %}
+                hello2
+                {{prod.produce_name}}
+            {% endif %}
+        {% endfor %}
         <hr>
     {% endfor %}
 </body>
