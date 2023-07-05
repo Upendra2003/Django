@@ -1,0 +1,24 @@
+{% extends 'recipe/base.html' %}
+{% block title %} OnlineRecipes | Home {% endblock %}
+{% block content %}
+<form class="container card mt-3 shadow" enctype="multipart/form-data" method="POST" action="{% url 'add-recipe' %}">
+  {% csrf_token %}
+  <div class="p-3">
+    <div class="mb-3">
+      <h1>Add Recipe</h1>
+      <hr>
+      <label for="exampleInputEmail1" class="form-label">Recipe Title</label>
+      <input name="recipe-title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Recipe Description</label>
+    <textarea name="recipe-description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="formFile" class="form-label">Recipe Image</label>
+    <input name="recipe-image" class="form-control" type="file" id="formFile">
+  </div>
+  <button type="submit" class="btn btn-primary">Add Recipe</button>
+  </div>
+</form>
+{% endblock %}

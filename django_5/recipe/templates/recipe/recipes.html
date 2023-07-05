@@ -1,0 +1,19 @@
+{% extends 'recipe/base.html' %}
+{% block title %} OnlineRecipes | Recipes {% endblock %}
+{% block content %}
+{% load static %}
+<h4 class="m-2">Featured Recipes</h4>
+{% for recipe in all_recipes %}
+  <div class="card d-flex flex-row m-2">
+    <img src="/media/{{recipe.recipe_image}}" style="width:259px; height:190px; object-fit: cover;" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5>{{recipe.recipe_title}}</h5>
+      <p class="card-text">{{recipe.recipe_description}}</p>
+    </div>
+    <div class="actions d-flex">
+      <button type="button" class="btn btn-outline-danger m-5" style="height:50px;" name="button">Delete</button>
+      <button type="button" class="btn btn-outline-primary m-5" style="height:50px;" name="button">Update</button>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}
