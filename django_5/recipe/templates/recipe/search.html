@@ -1,14 +1,15 @@
 {% extends 'recipe/base.html' %}
-{% block title %} OnlineRecipes | Recipes {% endblock %}
+{% block title %} OnlineRecipes | Home {% endblock %}
 {% block content %}
-{% load static %}
+{% if status %}
 <h4 style="background-color: rgba(0, 0, 253, 0.76); padding: 50px; color: white; text-align: center;">Featured Recipes</h4>
 <form class="d-flex container my-4" role="search" method="POST" action="{% url 'search-recipe' %}">
   {% csrf_token %}
   <input class="form-control me-2" name="search-recipe" type="search" placeholder="Search" aria-label="Search">
   <button class="btn btn-outline-success" type="submit">Search</button>
 </form>
-{% for recipe in all_recipes %}
+
+{% for recipe in get_recipe %}
   <div class="">
     <div class="card mx-auto mb-2 d-flex flex-row shadow" style="width: 80%;">
       <img src="/media/{{recipe.recipe_image}}" style="width:259px; height:190px; object-fit: cover;" class="card-img-top" alt="...">
@@ -24,4 +25,5 @@
     </div>
   </div>
 {% endfor %}
+{% endif %}
 {% endblock %}

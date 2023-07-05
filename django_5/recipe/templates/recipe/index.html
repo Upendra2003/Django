@@ -1,6 +1,7 @@
 {% extends 'recipe/base.html' %}
 {% block title %} OnlineRecipes | Home {% endblock %}
 {% block content %}
+<h4 style="background-color: rgba(0, 0, 253, 0.76); padding: 50px; color: white; text-align: center;">Add Recipes</h4>
 <form class="container card mt-3 shadow" enctype="multipart/form-data" method="POST" action="{% url 'add-recipe' %}">
   {% csrf_token %}
   <div class="p-3">

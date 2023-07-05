@@ -25,3 +25,13 @@ def show_recipes(request):
         "all_recipes":all_recipes
     }
     return render(request,'recipe/recipes.html',context)
+
+def search_recipe(request):
+    if request.method=='POST':
+        get_recipe=Recipe.objects.filter(recipe_title__icontains=request.POST.get('search-recipe')).all()
+        context={
+            'get_recipe':get_recipe,
+            'status':True
+        }
+        return render(request,'recipe/search.html',context)
+    return redirect(show_recipes)
