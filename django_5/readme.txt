@@ -1,1 +1,1 @@
-Reciepe app
+Recipe app
