@@ -35,3 +35,10 @@ def search_recipe(request):
         }
         return render(request,'recipe/search.html',context)
     return redirect(show_recipes)
+
+def view_recipe(request,id):
+    get_recipe=Recipe.objects.get(pk=id)
+    context={
+            'get_recipe':get_recipe,
+        }
+    return render(request,'recipe/view_recipe.html',context)
