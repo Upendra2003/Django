@@ -2,11 +2,16 @@
 {% block title %} OnlineRecipes | Recipes {% endblock %}
 {% block content %}
 {% load static %}
-<h4 style="background-color: rgba(0, 0, 253, 0.76); padding: 50px; color: white; text-align: center;">{{get_recipe.recipe_title}}</h4>
-<div class="container card p-3">
+
+<div class="container card mt-3 p-3">
     <img src="/media/{{get_recipe.recipe_image}}" width="100%" height="200px" style="object-fit: cover;" alt="">
     <h4 style="text-align: center;" class="m-3">{{get_recipe.recipe_title}}</h4>
     <hr>
     <p>{{get_recipe.recipe_description}}</p>
+    <hr>
+    <div class="d-flex justify-content-center">
+        <a href="{% url 'delete-recipe' get_recipe.id %}" style="list-style: none; text-decoration: none;"><button type="button" class="btn btn-outline-danger mx-2" style="height:50px;" name="button">Delete</button></a>
+        <a href="{% url 'update-recipe' get_recipe.id %}" style="list-style: none; text-decoration: none;"><button type="button" class="btn btn-outline-primary mx-2" style="height:50px;" name="button">Update</button></a>
+    </div>
 </div>
 {% endblock %}

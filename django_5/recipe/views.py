@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Recipe
+from django.contrib.auth.models import User
 
 # Create your views here.
 def home(request):
@@ -42,3 +43,30 @@ def view_recipe(request,id):
             'get_recipe':get_recipe,
         }
     return render(request,'recipe/view_recipe.html',context)
+
+def update_recipe(request,id):
+    get_recipe=Recipe.objects.get(id=id)
+    if request.method=='POST':
+        get_recipe.recipe_title=request.POST.get('recipe-title')
+        get_recipe.recipe_description=request.POST.get('recipe-description')
+        get_recipe.recipe_image=request.FILES.get('recipe-image')
+        get_recipe.save()
+        return redirect(show_recipes)
+    context={
+        "get_recipe":get_recipe
+    }
+    return render(request,'recipe/update.html',context)
+
+def delete_recipe(request,id):
+    Recipe.objects.get(id=id).delete()
+    return redirect(show_recipes)
+
+def register(request):
+    if request.method=='POST':
+        user = User.objects.create(
+            username=request.POST.get('username'),
+            email=request.POST.get('email')
+        )
+        user.set_password(request.POST.get('password'))
+        user.save()
+    return render(request,'recipe/register.html')

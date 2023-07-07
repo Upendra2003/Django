@@ -18,8 +18,8 @@
         <p class="card-text">{{recipe.recipe_description|truncatechars:40}}</p>
       </div>
       <div class="actions d-flex my-auto">
-        <a href="#" style="list-style: none; text-decoration: none;"><button type="button" class="btn btn-outline-danger mx-2" style="height:50px;" name="button">Delete</button></a>
-        <a href="#" style="list-style: none; text-decoration: none;"><button type="button" class="btn btn-outline-primary mx-2" style="height:50px;" name="button">Update</button></a>
+        <a href="{% url 'delete-recipe' recipe.id %}" style="list-style: none; text-decoration: none;"><button type="button" class="btn btn-outline-danger mx-2" style="height:50px;" name="button">Delete</button></a>
+        <a href="{% url 'update-recipe' recipe.id %}" style="list-style: none; text-decoration: none;"><button type="button" class="btn btn-outline-primary mx-2" style="height:50px;" name="button">Update</button></a>
         <a href="{% url 'view-recipe' recipe.id %}" style="list-style: none; text-decoration: none;"><button type="button" class="btn btn-outline-info mx-2" style="height:50px;" name="button">View Recipe</button></a>
       </div>
     </div>

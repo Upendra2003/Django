@@ -1,0 +1,32 @@
+{% extends 'recipe/base.html' %}
+{% block title %} OnlineRecipes | Home {% endblock %}
+{% block content %}
+<h4 style="background-color: rgba(0, 0, 253, 0.76); padding: 50px; color: white; text-align: center;">Update Recipes</h4>
+<form class="container card mt-3 shadow" enctype="multipart/form-data" method="POST" action="{% url 'update-recipe' get_recipe.id %}">
+  {% csrf_token %}
+  <div class="p-3">
+    <div class="mb-3">
+      <h1>Update Recipe</h1>
+      <hr>
+      <label for="exampleInputEmail1" class="form-label">Recipe Title</label>
+      <input name="recipe-title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{get_recipe.recipe_title}}">
+    </div>
+    <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Recipe Description</label>
+    <textarea name="recipe-description" class="form-control" id="exampleFormControlTextarea1" rows="7">{{get_recipe.recipe_description}}</textarea>
+  </div>
+  {% if get_recipe.recipe_image %}
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Recipe Image({{get_recipe.recipe_image}})</label>
+        <input name="recipe-image" class="form-control" type="file" id="formFile" value="C:\Upendra\Python\Django\django_5\media\{{get_recipe.recipe_image}}">
+    </div>
+  {% else %}
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Recipe Image</label>
+        <input name="recipe-image" class="form-control" type="file" id="formFile" value="">
+    </div>
+  {% endif %}
+  <button type="submit" class="btn btn-primary">Update Recipe</button>
+  </div>
+</form>
+{% endblock %}
