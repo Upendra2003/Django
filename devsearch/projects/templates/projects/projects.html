@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <li>{{project.project_name}}</li>
+    <li>{{project.project_desc}}</li>
+    <li>{{project.link}}</li>
+    <li>{{project.source_code}}</li>
+    {% for tag in tags %}
+        <li>{{tag}}</li>
+    {% endfor %}
+</body>
+</html>
+
