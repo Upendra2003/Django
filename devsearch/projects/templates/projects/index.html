@@ -1,14 +1,30 @@
 {% extends 'projects/base.html' %}
 {% block content %}
-    <div style="background-color: #A084E8; height: 30vh; display: flex; justify-content: center; align-items: center;">
+    <div style="background-color: #A084E8; height: 30vh; display: flex; justify-content: center; align-items: center; flex-direction: column;">
         <form>
-            <div style="display: flex; justify-content: space-between; align-items: center; border: 2px solid #A084E8;">
-                <input type="text" style="width: 800px; height: 40px; border-radius: 10px; border: none; outline: none; padding: 5px; color: #A084E8;">
-                <p>| Search</p>
+            <div class="container" style="border: 2px solid whitesmoke; border-radius: 10px;">
+                <input type="text" id="box" placeholder="" class="search__box" style="background: none; outline: none; border: none; color: whitesmoke; width: 800px; height: 40px;">
+                <i class="fas fa-search search__icon" style="cursor: pointer; color: white;" id="icon" onclick="toggleShow()"></i>
             </div>
         </form>
+        <p style="color: white; margin-top: 10px; font-size: 15px;">Every great developer you know got there by solving problems they were unqualified to solve until they actually did it.</p>
     </div>
-    {% for project in projects %}
-        <li><a href="{% url 'project' project.p_id %}">{{project.project_name}}</a></li>
-    {% endfor %}
+    <div class="container grid row pt-3 m-auto">
+        {% for project in projects %}
+            <div class="card m-2 ms-auto " style="width: 18rem; border: 1px solid #A084E8; box-shadow: 5px 5px #a084e85c; padding: 2px;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    {% if project.star %}
+                        <i class="fa fa-solid fa-star" style="float: right; cursor: pointer; color: #A084E8;"></i>
+                    {% else %}
+                    <i class="far fa-star" style="float: right; cursor: pointer; color: #A084E8;"></i>
+                    {% endif %}
+                    <h5 class="card-title">{{project.project_name}}</h5>
+                    <p class="card-text">{{project.project_desc|truncatechars:100}}</p>
+                    <p style="float: right; font-size: 10px;">{{project.created}}</p>
+                    <a href="{% url 'project' project.p_id %}" style="background-color: #A084E8; padding: 10px 20px; border-radius: 5px; text-decoration: none; color: white;">Visit</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
