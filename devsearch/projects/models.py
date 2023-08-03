@@ -7,6 +7,7 @@ class Project(models.Model):
     project_name=models.CharField(max_length=200)
     project_desc=models.TextField(max_length=1000,null=True,blank=True)
     # user
+    project_image=models.ImageField(null=True,blank=True,default='default.png')
     tags=models.ManyToManyField('Tag')
     star=models.BooleanField()
     created=models.DateField(auto_now_add=True)

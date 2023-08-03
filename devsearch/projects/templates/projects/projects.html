@@ -1,18 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <li>{{project.project_name}}</li>
-    <li>{{project.project_desc}}</li>
-    <li>{{project.link}}</li>
-    <li>{{project.source_code}}</li>
-    {% for tag in tags %}
-        <li>{{tag}}</li>
-    {% endfor %}
-</body>
-</html>
+{% extends 'projects/base.html' %}
+{% block content %}
+{% load static %}
+    <div class="" style="display: grid; grid-template-columns: 1.5fr 0.5fr 3fr;">
+        <div class="left p-3 m-3">
+            <img src={{project.project_image.url}} alt="" width="100%" style="border-radius: 10px; margin: 2px;">
+            <p>Skills Used</p>
+            {% for tag in tags %}
+                <p style="background-color: #DBC4F0; padding: 2px 5px; color: #A084E8; border-radius: 2px; border: 0.5px solid #A084E8; display: inline-block;">{{tag}}</p>
+            {% endfor %}
+            <p>Links</p>
+            <div class="dflex flex-column">
+                {% if  project.link %}
+                    <a style="color: #A084E8; margin: 5px;" href="{{project.link}}">Link ↗</a>
+                {% endif %}
+                {% if project.source_code %}
+                    <a style="color: #A084E8; margin: 5px;" href="{{project.source_code}}">Source Code ↗</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="line" style="width: 1px; background-color: #DBC4F0; height: 100vh; margin-left: 50px;" >
+        </div>
+        <div class="right mt-5 pe-5">
+            <h3 class="title">{{project.project_name}}</h3>
+            <p style="color: gray;">{{project.project_desc}}</p>
+            {% if project.star %}
+                <i class="fa fa-solid fa-star" style="cursor: pointer; color: #A084E8;">Starred</i>
+            {% else %}
+                <i class="far fa-star" style="cursor: pointer; color: #A084E8;">Add to favorites</i>
+            {% endif %}
+            <form action="">
+                <textarea name="review" id="" cols="70" rows="10" style="border: 2px solid #A084E8; border-radius: 10px; margin-top: 5px;"></textarea>
+                <br>
+                <button style="background-color: #A084E8; margin-top: 10px; padding: 10px 20px; border-radius: 5px; outline: none; border: none; color: white;">Submit Review</button>
+            </form>
+        </div>
+    </div>
+    
+    
+    
+    
+{% endblock %}
 
