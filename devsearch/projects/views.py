@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Project,Tag
+from .models import Project
+from .forms import ProjectForm
 
 # Create your views here.
 def home(request):
@@ -18,3 +19,17 @@ def project(request,id):
         'tags':tags
     }
     return render(request,'projects/projects.html',context)
+
+def publish(request):
+    form=ProjectForm()
+    if request.method=='POST':
+        form=ProjectForm(data=request.POST)
+        print(1)
+        print(form)
+        if form.is_valid():
+            form.save()
+        return redirect('home')
+    context={
+        'form':form,
+    }
+    return render(request,'projects/add-project.html',context)
