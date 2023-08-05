@@ -24,9 +24,9 @@
             <h3 class="title">{{project.project_name}}</h3>
             <p style="color: gray;">{{project.project_desc}}</p>
             {% if project.star %}
-                <i class="fa fa-solid fa-star" style="cursor: pointer; color: #A084E8;">Starred</i>
+                <i onclick="staronclick()" id="star" class="fa fa-solid fa-star" style="cursor: pointer; color: #A084E8;">Starred</i>
             {% else %}
-                <i class="far fa-star" style="cursor: pointer; color: #A084E8;">Add to favorites</i>
+                <i onclick="staronclick()" id="star" class="far fa-star" style="cursor: pointer; color: #A084E8;">Add to favorites</i>
             {% endif %}
             <form action="">
                 <textarea name="review" id="" cols="70" rows="10" style="border: 2px solid #A084E8; border-radius: 10px; margin-top: 5px;"></textarea>
@@ -36,7 +36,24 @@
         </div>
     </div>
     <script>
-
+        function staronclick(){
+            var star="{{project.star}}";
+            if(document.getElementById("star").className=="fa fa-solid fa-star"){
+                document.getElementById("star").className="far fa-star"
+                const changeText = document.querySelector("#star");
+                    changeText.addEventListener("click", function() {
+                    changeText.textContent = "Starred";
+                });
+                star=true;
+            }else{
+                document.getElementById("star").className="fa fa-solid fa-star"
+                const changeText = document.querySelector("#star");
+                    changeText.addEventListener("click", function() {
+                    changeText.textContent = "Add to favorites";
+                });
+                star=false;
+            }
+        }
     </script>
     
     

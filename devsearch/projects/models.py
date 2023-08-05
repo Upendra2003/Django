@@ -9,11 +9,13 @@ class Project(models.Model):
     # user
     project_image=models.ImageField(null=True,blank=True,default='default.png')
     tags=models.ManyToManyField('Tag')
-    star=models.BooleanField()
+    star=models.BooleanField(null=True,blank=True)
     created=models.DateField(auto_now_add=True)
     link=models.CharField(max_length=2000,null=True,blank=True)
     source_code=models.CharField(max_length=2000,null=True,blank=True)
     
+    class Meta:
+        ordering=['-created']
 
     def __str__(self):
         return self.project_name

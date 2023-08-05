@@ -24,8 +24,6 @@ def publish(request):
     form=ProjectForm()
     if request.method=='POST':
         form=ProjectForm(data=request.POST)
-        print(1)
-        print(form)
         if form.is_valid():
             form.save()
         return redirect('home')
@@ -33,3 +31,4 @@ def publish(request):
         'form':form,
     }
     return render(request,'projects/add-project.html',context)
+

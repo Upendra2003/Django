@@ -16,7 +16,7 @@
                 <img src='{{project.project_image.url}}'class="card-img-top" style="padding: 5px; border-radius: 10px;">
                 <div class="card-body">
                     {% if project.star %}
-                        <i class="fa fa-solid fa-star" style="float: right; cursor: pointer; color: #A084E8;"></i>
+                        <i id="star" onclick="staronclick()" class="fa fa-solid fa-star" style="float: right; cursor: pointer; color: #A084E8;"></i>
                     {% else %}
                         <i class="far fa-star" style="float: right; cursor: pointer; color: #A084E8;"></i>
                     {% endif %}
