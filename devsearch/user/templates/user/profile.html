@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <div class="" style="display: grid; grid-template-columns: 1.5fr 0.5fr 3fr;">
+        <div class="left p-3 m-3">
+            <img src={{get_profile.profile_img.url}} alt="" width="100%" style="border-radius: 50%; height: 200px; width: 200px; object-fit: cover; margin: 50px; border: 2px solid #DBC4F0; padding: 2px;">
+            <p class="mt-3">Social Media</p>
+            <hr>
+            <div class="dflex flex-column mx-3 mt-3">
+                {% if  get_profile.linkedin_link %}
+                    <a href="{{get_profile.linkedin_link}}"><img src="{% static 'images/icons/linkedin.svg' %}" alt="" width="20px" height="20px" style="cursor: pointer; margin: 3px;"></a>
+                {% endif %}
+                {% if get_profile.github_link %}
+                    <a href="{{get_profile.linkedin_link}}"><img src="{% static 'images/icons/github.svg' %}" alt="" width="20px"  height="20px" style="cursor: pointer; margin: 3px;"></a>
+                {% endif %}
+                {% if  get_profile.linkedin_link %}
+                    <a href="{{get_profile.linkedin_link}}"><img src="{% static 'images/icons/instagram.svg' %}" alt="" width="20px" height="20px" style="cursor: pointer; margin: 3px;"></a>
+                {% endif %}
+                {% if get_profile.github_link %}
+                    <a href="{{get_profile.linkedin_link}}"><img src="{% static 'images/icons/twitter.svg' %}" alt="" width="20px" height="20px" style="cursor: pointer; margin: 3px;"></a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="line" style="width: 1px; background-color: #DBC4F0; height: 100%;" ></div>
+        <div class="right mt-3">
+            <h3 class="title">{{get_profile.name}}</h3>
+            <hr>
+            <p style="color: gray;">{{get_profile.short_desc}}</p>
+            <p style="font-size: 13px;">{{get_profile.bio}}</p>
+            <hr>
+            <h5 style="color: gray;">Top Projects</h5>
+            <div class="container" style="display: grid; grid-template-columns: 0.5fr 0.5fr 0.5fr ;">
+                {% for project in get_projects %}
+                    <div class="card m-3 ms-auto " style="width: 16rem; border: 1px solid #A084E8; box-shadow: 5px 5px #a084e85c; padding: 2px;">
+                        <img src='{{project.project_image.url}}'class="card-img-top" style="padding: 5px; border-radius: 10px;">
+                        <div class="card-body">
+                            {% if project.star %}
+                                <i id="star" onclick="staronclick()" class="fa fa-solid fa-star" style="float: right; cursor: pointer; color: #A084E8;"></i>
+                            {% else %}
+                                <i class="far fa-star" style="float: right; cursor: pointer; color: #A084E8;"></i>
+                            {% endif %}
+                            <h5 class="card-title">{{project.project_name}}</h5>
+                            <p style="color: blueviolet; font-size: 13px; font-style: italic; cursor: pointer;">By {{project.owner.name}}</p>
+                            <p class="card-text">{{project.project_desc|truncatechars:100}}</p>
+                            <p style="float: right; font-size: 10px;">{{project.created}}</p>
+                            <a href="{% url 'project' project.p_id %}" style="background-color: #A084E8; padding: 10px 20px; border-radius: 5px; text-decoration: none; color: white;">Visit</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

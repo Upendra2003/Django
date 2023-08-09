@@ -21,7 +21,7 @@
                         <i class="far fa-star" style="float: right; cursor: pointer; color: #A084E8;"></i>
                     {% endif %}
                     <h5 class="card-title">{{project.project_name}}</h5>
-                    <p style="color: blueviolet; font-size: 13px; font-style: italic; cursor: pointer;">By Preetham</p>
+                    <a href="{% url 'profile' project.owner.p_id %}" style="color: blueviolet; font-size: 13px; font-style: italic; cursor: pointer;">By {{project.owner.name}}</a>
                     <p class="card-text">{{project.project_desc|truncatechars:100}}</p>
                     <p style="float: right; font-size: 10px;">{{project.created}}</p>
                     <a href="{% url 'project' project.p_id %}" style="background-color: #A084E8; padding: 10px 20px; border-radius: 5px; text-decoration: none; color: white;">Visit</a>
