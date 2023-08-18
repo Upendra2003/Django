@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from projects.views import home
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Q
 
 def login_page(request):
     if request.method=='POST':
@@ -40,14 +41,19 @@ def register_page(request):
         )
         user.set_password(request.POST.get('password'))
         user.save()
-        return redirect('login')
+        return redirect('user-profile')
 
     return render(request,'user/register-page.html')
 
 # Create your views here.
 @login_required(login_url='login')
 def user(request):
-    all_profiles=Profile.objects.all()
+    search_query=''
+    if request.GET.get('search_query'):
+        search_query=request.GET.get('search_query')
+    all_profiles=Profile.objects.filter(
+        Q(name__icontains=search_query) | Q(short_desc__icontains=search_query)
+    )
     context={
         'all_profiles':all_profiles
     }
@@ -71,7 +77,6 @@ def user_profile(request):
     }
     return render(request,'user/user-profile.html',context)
 
-@login_required(login_url='login')
 def edit_profile(request):
     profile=request.user.profile
     if request.method=='POST':

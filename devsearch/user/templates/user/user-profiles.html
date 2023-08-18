@@ -3,9 +3,9 @@
 {% load static %}
     <link rel="stylesheet" href="{% static 'css/card.css' %}">
     <div style="background-color: #A084E8; height: 30vh; display: flex; justify-content: center; align-items: center; flex-direction: column;">
-        <form>
+        <form method="GET" action="{% url 'user' %}">
             <div class="container" style="border: 2px solid whitesmoke; border-radius: 10px; box-shadow: 5px 5px #DBC4F0;">
-                <input type="text" id="box" placeholder="" class="search__box" style="background: none; outline: none; border: none; color: whitesmoke; width: 800px; height: 40px;">
+                <input type="text" id="box" placeholder="" class="search__box" style="background: none; outline: none; border: none; color: whitesmoke; width: 800px; height: 40px;" name="search_query">
                 <i class="fas fa-search search__icon" style="cursor: pointer; color: white;" id="icon" onclick="toggleShow()"></i>
             </div>
         </form>

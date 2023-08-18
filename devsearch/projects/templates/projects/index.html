@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <div style="background-color: #A084E8; height: 30vh; display: flex; justify-content: center; align-items: center; flex-direction: column;">
-        <form>
+        <form method="GET" action="{% url 'home' %}">
             <div class="container" style="border: 2px solid whitesmoke; border-radius: 10px; box-shadow: 5px 5px #DBC4F0;">
-                <input type="text" id="box" placeholder="" class="search__box" style="background: none; outline: none; border: none; color: whitesmoke; width: 800px; height: 40px;">
+                <input type="text" id="box" placeholder="" class="search__box" style="background: none; outline: none; border: none; color: whitesmoke; width: 800px; height: 40px;" name="search_query" value="{{search_query}}">
                 <i class="fas fa-search search__icon" style="cursor: pointer; color: white;" id="icon" onclick="toggleShow()"></i>
             </div>
         </form>
         <p style="color: white; margin-top: 10px; font-size: 15px;">Every great developer you know got there by solving problems they were unqualified to solve until they actually did it.</p>
     </div>
-    <div class="container grid row pt-3 m-auto">
+    <div class="container projects pt-3">
         {% for project in projects %}
-            <div class="card m-2 ms-auto " style="width: 18rem; border: 1px solid #A084E8; box-shadow: 5px 5px #a084e85c; padding: 2px;">
+            <div class="card mx-auto my-2 " style="width: 18rem; border: 1px solid #A084E8; box-shadow: 5px 5px #a084e85c; padding: 2px;">
                 <img src='{{project.project_image.url}}'class="card-img-top" style="padding: 5px; border-radius: 10px;">
                 <div class="card-body">
                     {% if project.star %}

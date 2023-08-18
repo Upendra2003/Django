@@ -4,3 +4,8 @@
 *{
     font-family: 'Lato', sans-serif;
 }
+
+.projects{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
