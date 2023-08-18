@@ -4,7 +4,7 @@ from user.models import Profile
 
 # Create your models here.
 class Project(models.Model):
-    owner=models.ForeignKey(Profile,on_delete=models.SET_NULL,null=True,blank=True)
+    owner=models.ForeignKey(Profile,on_delete=models.CASCADE,null=True,blank=True)
     p_id=models.UUIDField(default=uuid.uuid4,unique=True,primary_key=True,editable=False)
     project_name=models.CharField(max_length=200)
     project_desc=models.TextField(max_length=1000,null=True,blank=True)

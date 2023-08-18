@@ -1,0 +1,145 @@
+/* Global Variables */
+:root {
+    --color1: #DBC4F0;
+    --color2: #A084E8;
+    --color2Hover: #415059;
+    --color3: #fff;
+}
+
+/* Reset Default Settings */
+
+.login {
+    background-color: var(--color1);
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logincontainer {
+    background-color: var(--color3);
+    width: 700px;
+    height: 350px;
+    border-radius: 20px;
+    overflow: hidden;
+
+    /* Flex */
+    display: flex;
+}
+
+.logincontainer__svgs {
+    background-color: var(--color2);
+    width: 50%;
+
+    /* Flex */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logincontainer__svg1 {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 10px;
+}
+
+.logincontainer__svg2 {
+    width: 170px;
+    height: 18px;
+}
+
+.logincontainer__content {
+    width: 50%;
+    position: relative;
+
+    /* Flex */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logincontainer__form {
+    margin-bottom: 20px;
+    
+    /* Flex */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logincontainer__inputField {
+    background-color: transparent;
+    width: 220px;
+    padding: 0 0 10px 5px;
+    font-size: 15px;
+    letter-spacing: 1px;
+
+    /* Border */
+    border: none;
+    border-bottom: solid 1px var(--color2);
+    border-radius: 0;
+}
+
+.logincontainer__inputField:first-of-type {
+    margin-bottom: 35px;
+}
+
+.logincontainer__inputField:focus-visible {
+    border-bottom: solid 2px var(--color2Hover);
+    outline: none;
+}
+
+.logincontainer__sumbitButton {
+    background-color: var(--color2);
+    color: var(--color3);
+    width: 220px;
+    padding: 15px 0;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    /* Text */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    /* Border */
+    border: none;
+    border-radius: 50px;
+}
+
+.logincontainer__sumbitButton:hover {
+    background-color: var(--color2Hover);
+}
+
+.logincontainer__links {
+    /* Position */
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+
+    /* Flex */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logincontainer__link {
+    color: var(--color2);
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.logincontainer__link:hover {
+    text-decoration: underline;
+}
+
+.logincontainer__separator {
+    background-color: var(--color2);
+    width: 1px;
+    height: 10px;
+    margin: 0 15px;
+}
