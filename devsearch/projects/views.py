@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Project
+from .models import Project,Review
 from .forms import ProjectForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 
 # Create your views here.
 @login_required(login_url='login')
@@ -11,12 +12,25 @@ def home(request):
     search_query=''
     if request.GET.get('search_query'):
         search_query=request.GET.get('search_query')
-    projects=Project.objects.filter(
+    projects=Project.objects.distinct().filter(
         Q(project_name__icontains=search_query) | Q(project_desc__icontains=search_query) | Q(tags__tag_name__icontains=search_query)
     )
+
+    page=request.GET.get('page')
+    results=6
+    paginator=Paginator(projects,results)
+    try:
+        projects=paginator.page(page)
+    except PageNotAnInteger:
+        page=1
+        projects=paginator.page(page)
+    except EmptyPage:
+        page=paginator.num_pages
+        projects=paginator.page(page)
     context={
         'projects':projects,
-        'search_query':search_query
+        'search_query':search_query,
+        'paginator':paginator
     }
     return render(request,'projects/index.html',context)
 

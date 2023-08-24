@@ -7,6 +7,7 @@ from projects.views import home
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 
 def login_page(request):
     if request.method=='POST':
@@ -51,11 +52,25 @@ def user(request):
     search_query=''
     if request.GET.get('search_query'):
         search_query=request.GET.get('search_query')
-    all_profiles=Profile.objects.filter(
+    all_profiles=Profile.objects.distinct().filter(
         Q(name__icontains=search_query) | Q(short_desc__icontains=search_query)
     )
+
+    page=request.GET.get('page')
+    results=3
+    paginator=Paginator(all_profiles,results)
+    try:
+        all_profiles=paginator.page(page)
+    except PageNotAnInteger:
+        page=1
+        all_profiles=paginator.page(page)
+    except EmptyPage:
+        page=paginator.num_pages
+        all_profiles=paginator.page(page)
+
     context={
-        'all_profiles':all_profiles
+        'all_profiles':all_profiles,
+        'paginator':paginator
     }
     return render(request,'user/user-profiles.html',context)
 

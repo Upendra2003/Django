@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/review.css' %}">
     <div class="" style="display: grid; grid-template-columns: 1.5fr 0.5fr 3fr;">
         <div class="left p-3 m-3">
             <img src={{project.project_image.url}} alt="" width="100%" style="border-radius: 10px; margin: 2px;">
@@ -18,45 +19,48 @@
                 {% endif %}
             </div>
         </div>
-        <div class="line" style="width: 1px; background-color: #DBC4F0; height: 100vh; margin-left: 50px;" >
+        <div class="line" style="width: 1px; background-color: #DBC4F0; height: 100%; margin-left: 50px;" >
         </div>
         <div class="right mt-5 pe-5">
             <h3 class="title">{{project.project_name}}</h3>
             <p style="color: gray;">{{project.project_desc}}</p>
             {% if project.star %}
-                <i onclick="staronclick()" id="star" class="fa fa-solid fa-star" style="cursor: pointer; color: #A084E8;">Starred</i>
-            {% else %}
-                <i onclick="staronclick()" id="star" class="far fa-star" style="cursor: pointer; color: #A084E8;">Add to favorites</i>
+                <i id="star" class="fa fa-solid fa-star" style="cursor: pointer; color: #A084E8;"></i>
             {% endif %}
             <form action="">
                 <textarea name="review" id="" cols="70" rows="10" style="border: 2px solid #A084E8; border-radius: 10px; margin-top: 5px;"></textarea>
                 <br>
                 <button style="background-color: #A084E8; margin-top: 10px; padding: 10px 20px; border-radius: 5px; outline: none; border: none; color: white;">Submit Review</button>
             </form>
+            <div class="reviews">
+                <section id="testimonials">
+                    {% for review in project.review_set.all %}
+                    <div class="testimonial-box-container">  
+                        <div class="testimonial-box"> 
+                            <div class="box-top">                  
+                                <div class="profile">
+                                    <div class="profile-img">
+                                        <a href="{% url 'profile' review.owner.p_id %}"><img src="{{review.owner.profile_img.url}}" /></a>
+                                    </div>
+                                    <div class="name-user">
+                                        <strong>{{review.owner.name}}</strong>
+                                        <span>{{review.owner.email}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="client-comment">
+                                <p>{{review.body}}</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </section>
+            </div>
         </div>
+        
     </div>
-    <script>
-        function staronclick(){
-            var star="{{project.star}}";
-            if(document.getElementById("star").className=="fa fa-solid fa-star"){
-                document.getElementById("star").className="far fa-star"
-                const changeText = document.querySelector("#star");
-                    changeText.addEventListener("click", function() {
-                    changeText.textContent = "Starred";
-                });
-                star=true;
-            }else{
-                document.getElementById("star").className="fa fa-solid fa-star"
-                const changeText = document.querySelector("#star");
-                    changeText.addEventListener("click", function() {
-                    changeText.textContent = "Add to favorites";
-                });
-                star=false;
-            }
-        }
-    </script>
-    
-    
+
     
 {% endblock %}
 
