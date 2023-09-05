@@ -39,6 +39,15 @@ def home(request):
 def project(request,id):
     project=Project.objects.get(pk=id)
     tags=project.tags.all()
+
+    if request.method=='POST':
+        review=Review.objects.create(
+            owner=request.user.profile,
+            project=project,
+            body=request.POST.get('review')
+        )
+        review.save()
+
     context={
         'project':project,
         'tags':tags

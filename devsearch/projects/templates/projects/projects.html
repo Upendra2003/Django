@@ -27,7 +27,8 @@
             {% if project.star %}
                 <i id="star" class="fa fa-solid fa-star" style="cursor: pointer; color: #A084E8;"></i>
             {% endif %}
-            <form action="">
+            <form action="{% url 'project' project.p_id %}" method="POST">
+                {% csrf_token %}
                 <textarea name="review" id="" cols="70" rows="10" style="border: 2px solid #A084E8; border-radius: 10px; margin-top: 5px;"></textarea>
                 <br>
                 <button style="background-color: #A084E8; margin-top: 10px; padding: 10px 20px; border-radius: 5px; outline: none; border: none; color: white;">Submit Review</button>

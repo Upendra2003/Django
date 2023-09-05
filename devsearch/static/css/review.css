@@ -40,7 +40,8 @@ a{
     box-shadow: 5px 5px #a084e85c;
     background-color: #ffffff;
     padding: 20px;
-    margin: 15px 0 0 -70px;
+    margin: 15px 0 10px -70px;
+    border-radius: 10px;
 }
 .profile-img{
     width:50px;
